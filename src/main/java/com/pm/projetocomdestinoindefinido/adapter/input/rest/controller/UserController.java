@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+@CrossOrigin(origins = "${projetoComDestinoIndefinido.frontendUrl}", allowedHeaders = "*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
-@CrossOrigin(origins = "${frontendUrl}")
 public class UserController {
 
   private final UserUseCase userUseCase;

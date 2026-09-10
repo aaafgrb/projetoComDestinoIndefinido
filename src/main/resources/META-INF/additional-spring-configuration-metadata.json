@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "projetoComDestinoIndefinido.frontendUrl",
+      "type": "java.lang.String",
+      "description": "Description for projetoComDestinoIndefinido.frontendUrl."
+  }
+] }
