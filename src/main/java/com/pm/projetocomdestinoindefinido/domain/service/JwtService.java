@@ -4,6 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -18,17 +20,18 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-  public static final String SECRET = "5367566859703373367639792F423F452848284D6251655468576D5A71347437";
+  @Value("${projetoComDestinoIndefinido.authKeySecret}")
+  private String SECRET;
 
-  public String generateToken(String email) { // Use email as username
+  public String generateToken(String subject) {
     Map<String, Object> claims = new HashMap<>();
-    return createToken(claims, email);
+    return createToken(claims, subject);
   }
 
-  private String createToken(Map<String, Object> claims, String email) {
+  private String createToken(Map<String, Object> claims, String subject) {
     return Jwts.builder()
       .claims(claims)
-      .subject(email)
+      .subject(subject)
       .issuedAt(new Date())
       .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
       .signWith(getSignKey())

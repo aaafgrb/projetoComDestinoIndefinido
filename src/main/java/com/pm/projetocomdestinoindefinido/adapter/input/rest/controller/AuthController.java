@@ -21,21 +21,13 @@ public class AuthController {
 
   @PostMapping("/generateToken")
   public String authenticateAndGetToken(@RequestBody AuthRequestDto authRequestDto) {
-    System.out.println(authRequestDto);
-    try {
-      Authentication authentication = authenticationManager.authenticate(
-              new UsernamePasswordAuthenticationToken(authRequestDto.getUserId(), authRequestDto.getPassword())
-      );
-      if (authentication.isAuthenticated()) {
-        return jwtService.generateToken(authRequestDto.getUserId());
-      } else {
-        throw new UsernameNotFoundException("Invalid user request!");
-      }
-
-    }catch (Exception e) {
-      System.out.println(e);
+    Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(authRequestDto.getUserId(), authRequestDto.getPassword())
+    );
+    if (authentication.isAuthenticated()) {
+      return jwtService.generateToken(authRequestDto.getUserId());
+    } else {
+      throw new UsernameNotFoundException("Invalid user request!");
     }
-
-    return null;
   }
 }

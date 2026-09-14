@@ -15,21 +15,21 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class NodeRepositoryImpl implements NodeRepository {
 
-  private final NodeJpaRepository repository;
+  private final NodeJpaRepository nodeJpaRepository;
   private final NodeEntityMapper nodeEntityMapper;
 
   @Override
   public Node createNode(Node node) {
     NodeEntity entity = nodeEntityMapper.toEntity(node);
 
-    NodeEntity saved = repository.save(entity);
+    NodeEntity saved = nodeJpaRepository.save(entity);
 
     return nodeEntityMapper.toModel(saved);
   }
 
   @Override
   public Optional<Node> findById(UUID id) {
-    return repository.findById(id)
+    return nodeJpaRepository.findById(id)
             .map(nodeEntityMapper::toModel);
   }
 

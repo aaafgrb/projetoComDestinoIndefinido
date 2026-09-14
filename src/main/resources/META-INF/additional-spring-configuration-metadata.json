@@ -4,5 +4,10 @@
       "name": "projetoComDestinoIndefinido.frontendUrl",
       "type": "java.lang.String",
       "description": "Description for projetoComDestinoIndefinido.frontendUrl."
-  }
+    },
+    {
+      "name": "projetoComDestinoIndefinido.authKeySecret",
+      "type": "java.lang.String",
+      "description": "Description for projetoComDestinoIndefinido.authKeySecret."
+    }
 ] }

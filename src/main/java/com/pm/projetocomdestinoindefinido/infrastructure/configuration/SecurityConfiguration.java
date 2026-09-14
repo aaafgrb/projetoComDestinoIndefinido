@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -34,14 +35,21 @@ public class SecurityConfiguration {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
+      .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
       .csrf(AbstractHttpConfigurer::disable)
       .authorizeHttpRequests(auth -> auth
         .requestMatchers(HttpMethod.GET, "/user/*").permitAll()
+        .requestMatchers(HttpMethod.GET, "/node/*").permitAll()
         .requestMatchers(HttpMethod.POST, "/user/").permitAll()
         .requestMatchers("/auth/generateToken").permitAll()
 
-        .requestMatchers("/auth/user/**").hasAuthority("ROLE_USER")
-        .requestMatchers("/auth/admin/**").hasAuthority("ROLE_ADMIN")
+        .requestMatchers(HttpMethod.PUT, "/user/*").hasAuthority("ROLE_USER")
+        .requestMatchers(HttpMethod.PUT, "/node/*").hasAuthority("ROLE_USER")
+
+        .requestMatchers(HttpMethod.DELETE, "/user/*").hasAuthority("ROLE_ADMIN")
+        .requestMatchers(HttpMethod.DELETE, "/node/*").hasAuthority("ROLE_ADMIN")
+
+        .requestMatchers("/h2-console/**").permitAll()
 
         .anyRequest().authenticated()
       )

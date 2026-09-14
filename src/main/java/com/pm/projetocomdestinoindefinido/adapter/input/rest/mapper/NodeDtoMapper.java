@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface NodeDtoMapper {
 
-//  @Mapping(source = "creatorUser.id", target = "creatorUserId")
+  @Mapping(source = "creatorUser.id", target = "creatorUserId")
   NodeResponseDTO toResponseDto (Node node);
 
   Node toModel (NodeRequestDTO nodeRequestDTO);

@@ -6,12 +6,12 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {UserEntityMapper.class })
 public interface NodeEntityMapper {
 
-//  @Mapping(source = "creatorUser", target = "creatorUserEntity")
+  @Mapping(source = "creatorUser", target = "creatorUserEntity")
   NodeEntity toEntity (Node node);
 
-//  @Mapping(source = "creatorUserEntity", target = "creatorUser")
+  @Mapping(source = "creatorUserEntity", target = "creatorUser")
   Node toModel(NodeEntity nodeEntity);
 }
