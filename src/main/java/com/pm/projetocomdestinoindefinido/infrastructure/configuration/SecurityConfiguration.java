@@ -40,14 +40,13 @@ public class SecurityConfiguration {
       .authorizeHttpRequests(auth -> auth
         .requestMatchers(HttpMethod.GET, "/user/*").permitAll()
         .requestMatchers(HttpMethod.GET, "/node/*").permitAll()
+        .requestMatchers(HttpMethod.GET, "/connection/*").permitAll()
         .requestMatchers(HttpMethod.POST, "/user/").permitAll()
         .requestMatchers("/auth/generateToken").permitAll()
 
         .requestMatchers(HttpMethod.PUT, "/user/*").hasAuthority("ROLE_USER")
-        .requestMatchers(HttpMethod.PUT, "/node/*").hasAuthority("ROLE_USER")
 
         .requestMatchers(HttpMethod.DELETE, "/user/*").hasAuthority("ROLE_ADMIN")
-        .requestMatchers(HttpMethod.DELETE, "/node/*").hasAuthority("ROLE_ADMIN")
 
         .requestMatchers("/h2-console/**").permitAll()
 

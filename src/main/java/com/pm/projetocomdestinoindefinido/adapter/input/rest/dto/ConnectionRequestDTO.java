@@ -3,13 +3,11 @@ package com.pm.projetocomdestinoindefinido.adapter.input.rest.dto;
 import lombok.Data;
 import lombok.NonNull;
 
-import java.util.UUID;
-
 @Data
-public class AuthRequestDto {
+public class ConnectionRequestDTO {
   @NonNull
-  String userId;
+  String startNodeId;
 
   @NonNull
-  String password;
+  String endNodeId;
 }

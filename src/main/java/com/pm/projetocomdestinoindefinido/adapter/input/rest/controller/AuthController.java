@@ -1,13 +1,12 @@
 package com.pm.projetocomdestinoindefinido.adapter.input.rest.controller;
 
-import com.pm.projetocomdestinoindefinido.adapter.input.rest.dto.AuthRequestDto;
+import com.pm.projetocomdestinoindefinido.adapter.input.rest.dto.AuthRequestDTO;
 import com.pm.projetocomdestinoindefinido.domain.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "${projetoComDestinoIndefinido.frontendUrl}", allowedHeaders = "*")
@@ -20,7 +19,7 @@ public class AuthController {
   private final AuthenticationManager authenticationManager;
 
   @PostMapping("/generateToken")
-  public String authenticateAndGetToken(@RequestBody AuthRequestDto authRequestDto) {
+  public String authenticateAndGetToken(@RequestBody AuthRequestDTO authRequestDto) {
     Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(authRequestDto.getUserId(), authRequestDto.getPassword())
     );
