@@ -15,5 +15,10 @@ public class UserEntity {
   UUID id;
 
   @NotNull
+  String password;
+
+  @NotNull
   String name;
+
+  String roles;
 }

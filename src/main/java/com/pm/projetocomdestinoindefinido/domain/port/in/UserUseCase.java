@@ -1,6 +1,9 @@
 package com.pm.projetocomdestinoindefinido.domain.port.in;
 
 import com.pm.projetocomdestinoindefinido.domain.model.User;
+import org.jspecify.annotations.NonNull;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.UUID;
 

@@ -1,20 +1,17 @@
-//package com.pm.projetocomdestinoindefinido.adapter.output.persistence.mapper;
-//
-//import com.pm.projetocomdestinoindefinido.domain.model.Node;
-//import com.pm.projetocomdestinoindefinido.adapter.output.persistence.entity.NodeEntity;
-//
-//public class NodeEntityMapper {
-//  public static Node toNode(NodeEntity nodeEntity) {
-//    Node node = new Node();
-//    node.setId(nodeEntity.getId());
-//    node.setValue(nodeEntity.getValue());
-//    return node;
-//  }
-//
-//  public static NodeEntity toNodeEntity(Node node) {
-//    NodeEntity nodeEntity = new NodeEntity();
-//    nodeEntity.setId(node.getId());
-//    nodeEntity.setValue(node.getValue());
-//    return nodeEntity;
-//  }
-//}
+package com.pm.projetocomdestinoindefinido.adapter.output.persistence.mapper;
+
+import com.pm.projetocomdestinoindefinido.domain.model.Node;
+import com.pm.projetocomdestinoindefinido.adapter.output.persistence.entity.NodeEntity;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
+
+@Mapper(componentModel = "spring")
+public interface NodeEntityMapper {
+
+//  @Mapping(source = "creatorUser", target = "creatorUserEntity")
+  NodeEntity toEntity (Node node);
+
+//  @Mapping(source = "creatorUserEntity", target = "creatorUser")
+  Node toModel(NodeEntity nodeEntity);
+}

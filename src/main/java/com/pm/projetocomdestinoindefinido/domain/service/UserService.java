@@ -1,9 +1,15 @@
 package com.pm.projetocomdestinoindefinido.domain.service;
 
 import com.pm.projetocomdestinoindefinido.domain.model.User;
+import com.pm.projetocomdestinoindefinido.domain.model.UserAuthDetails;
 import com.pm.projetocomdestinoindefinido.domain.port.in.UserUseCase;
 import com.pm.projetocomdestinoindefinido.domain.port.out.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NonNull;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,6 +20,7 @@ import java.util.UUID;
 public class UserService implements UserUseCase {
 
   private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
 
   @Override
   public User getUserById(UUID id) {
@@ -23,11 +30,15 @@ public class UserService implements UserUseCase {
 
   @Override
   public User createUser(User user) {
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+    user.setRoles("ROLE_USER");
+
     return userRepository.createUser(user);
   }
 
   @Override
   public User updateUser(UUID id, User user) {
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
     user.setId(id);
     return userRepository.updateUser(user);
   }

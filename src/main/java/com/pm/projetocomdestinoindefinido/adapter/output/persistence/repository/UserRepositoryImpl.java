@@ -15,17 +15,18 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
   private final UserJpaRepository userJpaRepository;
+  private final UserEntityMapper userEntityMapper;
 
   @Override
   public Optional<User> getUserById(UUID id) {
-    return userJpaRepository.findById(id).map(UserEntityMapper::toModel);
+    return userJpaRepository.findById(id).map(userEntityMapper::toModel);
   }
 
   @Override
   public User createUser(User user) {
-    UserEntity userEntity = UserEntityMapper.toEntity(user);
+    UserEntity userEntity = userEntityMapper.toEntity(user);
     UserEntity savedUserEntity = userJpaRepository.save(userEntity);
-    return UserEntityMapper.toModel(savedUserEntity);
+    return userEntityMapper.toModel(savedUserEntity);
   }
 
   @Override
@@ -37,7 +38,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     UserEntity savedUserEntity = userJpaRepository.save(managedUserEntity);
 
-    return UserEntityMapper.toModel(savedUserEntity);
+    return userEntityMapper.toModel(savedUserEntity);
   }
 
   @Override
