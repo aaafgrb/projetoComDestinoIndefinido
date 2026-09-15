@@ -6,6 +6,6 @@ import java.util.UUID;
 
 public interface NodeUseCase {
   Node getNode(UUID id);
-  Node createNode(Node node);
+  Node createNode(String content);
 //  Node deleteNode(UUID id);
 }

@@ -6,7 +6,7 @@ import com.pm.projetocomdestinoindefinido.domain.model.Node;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring" )
+@Mapper(componentModel = "spring", uses = {NodeDtoMapper.class})
 public interface NodeDtoMapper {
 
   @Mapping(source = "creatorUser.id", target = "creatorUserId")

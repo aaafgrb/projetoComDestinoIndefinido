@@ -1,7 +1,9 @@
 package com.pm.projetocomdestinoindefinido.domain.service;
 
+import com.pm.projetocomdestinoindefinido.domain.model.Comment;
 import com.pm.projetocomdestinoindefinido.domain.model.Node;
 import com.pm.projetocomdestinoindefinido.domain.model.User;
+import com.pm.projetocomdestinoindefinido.domain.port.in.CommentUseCase;
 import com.pm.projetocomdestinoindefinido.domain.port.in.NodeUseCase;
 import com.pm.projetocomdestinoindefinido.adapter.output.persistence.entity.NodeEntity;
 import com.pm.projetocomdestinoindefinido.domain.port.out.NodeRepository;
@@ -20,6 +22,7 @@ public class NodeService implements NodeUseCase {
 
   private final NodeRepository nodeRepository;
   private final UserRepository userRepository;
+  private final CommentUseCase commentUseCase;
 
   @Override
   public Node getNode(UUID id) {
@@ -28,11 +31,11 @@ public class NodeService implements NodeUseCase {
   }
 
   @Override
-  public Node createNode(Node node) {
-    String userIdStr = Objects.requireNonNull(SecurityContextHolder.getContext().getAuthentication()).getName();
-    User user = userRepository.getUserById(UUID.fromString(userIdStr)).orElse(null);
-
-    node.setCreatorUser(user);
+  public Node createNode(String content) {
+    Comment comment = commentUseCase.createComment(content, null);
+    Node node = new Node();
+    node.setCreatorUser(comment.getCreatorUser());
+    node.setComment(comment);
 
     return nodeRepository.createNode(node);
   }

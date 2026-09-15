@@ -7,6 +7,6 @@ import java.util.UUID;
 @Data
 public class NodeResponseDTO {
   UUID id;
-  String content;
+  CommentResponseDTO comment;
   UUID creatorUserId;
 }

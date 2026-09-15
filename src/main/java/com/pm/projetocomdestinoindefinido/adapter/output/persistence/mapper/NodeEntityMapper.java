@@ -5,7 +5,7 @@ import com.pm.projetocomdestinoindefinido.adapter.output.persistence.entity.Node
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {UserEntityMapper.class })
+@Mapper(componentModel = "spring", uses = {CommentEntityMapper.class, UserEntityMapper.class })
 public interface NodeEntityMapper {
 
   @Mapping( source = "creatorUser", target = "creatorUserEntity" )

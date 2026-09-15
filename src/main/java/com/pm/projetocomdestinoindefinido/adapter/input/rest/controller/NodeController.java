@@ -24,6 +24,6 @@ public class NodeController {
 
   @PostMapping("/")
   NodeResponseDTO createNode(@RequestBody NodeRequestDTO nodeRequestDTO) {
-    return nodeDtoMapper.toResponseDto(nodeUseCase.createNode(nodeDtoMapper.toModel(nodeRequestDTO)));
+    return nodeDtoMapper.toResponseDto(nodeUseCase.createNode(nodeRequestDTO.getContent()));
   }
 }

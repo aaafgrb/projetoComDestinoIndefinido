@@ -5,8 +5,9 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-public class Node {
+public class Comment {
+  UUID parentCommentId;
   UUID id;
-  Comment comment;
   User creatorUser;
+  String content;
 }

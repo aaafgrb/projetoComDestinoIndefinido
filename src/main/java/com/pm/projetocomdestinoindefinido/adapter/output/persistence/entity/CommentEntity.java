@@ -1,5 +1,6 @@
 package com.pm.projetocomdestinoindefinido.adapter.output.persistence.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -8,19 +9,21 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "tb_node")
-public class NodeEntity {
+@Table(name = "tb_comment")
+public class CommentEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   UUID id;
 
+  @Nullable
+  UUID parentCommentId;
+
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "creator_user_id")
   @NotNull
-  UserEntity creatorUserEntity;
+  UserEntity creatorUser;
 
-  @OneToOne
   @NotNull
-  @JoinColumn(name = "comment_id")
-  CommentEntity comment;
+  String content;
 }
