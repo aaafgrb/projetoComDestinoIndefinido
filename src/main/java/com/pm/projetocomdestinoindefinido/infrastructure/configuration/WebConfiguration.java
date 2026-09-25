@@ -22,31 +22,8 @@ public class WebConfiguration {
   private int httpsPort;
 
   @Bean
-  public WebMvcConfigurer corsConfigurer() {
-    return new WebMvcConfigurer() {
-      @Override
-      public void addCorsMappings(@NonNull CorsRegistry registry) {
-        registry.addMapping("/**").allowedHeaders("*");
-      }
-    };
-  }
-
-  @Bean
   public ServletWebServerFactory servletContainer() {
-    TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
-      @Override
-      protected void postProcessContext(Context context) {
-        SecurityConstraint securityConstraint = new SecurityConstraint();
-        securityConstraint.setUserConstraint("CONFIDENTIAL");
-
-        SecurityCollection collection = new SecurityCollection();
-        collection.addPattern("/*");
-        securityConstraint.addCollection(collection);
-
-        context.addConstraint(securityConstraint);
-      }
-    };
-
+    TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
     tomcat.addAdditionalConnectors(createHttpConnector());
     return tomcat;
   }
